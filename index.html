@@ -64,9 +64,9 @@
   /* Sound rings decoration */
   .sound-rings {
     position: absolute;
-    right: 8%;
     top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 420px;
     height: 420px;
     opacity: 0.07;
@@ -89,25 +89,39 @@
     50% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
   }
 
+  /* Hero layout: text and portrait share one centered, max-width row,
+     so the photo stays a fixed, sane distance from the text at any
+     viewport width instead of drifting toward the window edge. */
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 6rem 8% 4rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+
   /* Portrait, centered on the sound rings */
   .hero-photo-wrap {
-    position: absolute;
-    right: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 420px;
-    height: 420px;
+    position: relative;
+    flex: 0 0 auto;
+    width: 300px;
+    height: 300px;
+    margin-top: -2.7rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
-    pointer-events: none;
     opacity: 0;
     animation: fade-up 0.8s ease forwards 0.3s;
   }
   .hero-photo {
-    width: 260px;
-    height: 260px;
+    position: relative;
+    z-index: 1;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--gold);
@@ -117,8 +131,8 @@
   .hero-content {
     position: relative;
     z-index: 2;
-    padding: 6rem 8% 4rem;
-    max-width: 1200px;
+    flex: 1 1 480px;
+    min-width: 0;
   }
 
   .hero-eyebrow {
@@ -134,7 +148,7 @@
 
   .hero-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(2.6rem, 5vw, 4.8rem);
     font-weight: 300;
     color: var(--white);
     line-height: 1.05;
@@ -768,16 +782,13 @@
     .sound-rings { display: none; }
     .nav-links { display: none; }
     section { padding: 5rem 6%; }
-    .hero-photo-wrap {
-      position: static;
-      align-self: center;
-      width: auto;
-      height: auto;
-      margin: 5.5rem 0 2rem;
-      opacity: 1;
-      animation: none;
+    .hero-inner {
+      flex-direction: column;
+      padding: 5.5rem 6% 3rem;
+      gap: 1.5rem;
     }
-    .hero-photo { width: 150px; height: 150px; }
+    .hero-photo-wrap { width: auto; height: auto; margin-top: 0; }
+    .hero-photo { width: 130px; height: 130px; }
   }
   @media (max-width: 600px) {
     .brands-grid { grid-template-columns: repeat(2, 1fr); }
@@ -814,20 +825,21 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="sound-rings">
-    <div class="ring"></div>
-    <div class="ring"></div>
-    <div class="ring"></div>
-    <div class="ring"></div>
-    <div class="ring"></div>
-  </div>
   <div class="wave-container">
     <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,60 C180,100 360,20 540,60 C720,100 900,20 1080,60 C1260,100 1440,20 1440,60 L1440,120 L0,120Z" fill="#2a9090"/>
       <path d="M0,80 C200,40 400,100 600,80 C800,60 1000,100 1200,80 C1350,65 1440,75 1440,80 L1440,120 L0,120Z" fill="#1a6b6b" opacity="0.6"/>
     </svg>
   </div>
+  <div class="hero-inner">
   <div class="hero-photo-wrap">
+    <div class="sound-rings">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
     <img src="loic-photo.jpg" alt="Loïc Polya-Somogyi" class="hero-photo">
   </div>
   <div class="hero-content">
@@ -853,6 +865,7 @@
         06 08 03 86 61
       </div>
     </div>
+  </div>
   </div>
 </section>
 
