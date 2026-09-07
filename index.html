@@ -98,19 +98,23 @@
     max-width: 1300px;
     margin: 0 auto;
     padding: 6rem 8% 4rem;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-start;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-areas:
+      "eyebrow photo"
+      "main    photo";
+    column-gap: 3rem;
+    align-items: start;
   }
+  .hero-eyebrow { grid-area: eyebrow; }
 
   /* Portrait, centered on the sound rings */
   .hero-photo-wrap {
+    grid-area: photo;
     position: relative;
-    flex: 0 0 auto;
     width: 300px;
     height: 300px;
-    margin-top: -2.7rem;
+    margin-top: 1.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,7 +135,7 @@
   .hero-content {
     position: relative;
     z-index: 2;
-    flex: 1 1 480px;
+    grid-area: main;
     min-width: 0;
   }
 
@@ -783,11 +787,15 @@
     .nav-links { display: none; }
     section { padding: 5rem 6%; }
     .hero-inner {
-      flex-direction: column;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "eyebrow"
+        "photo"
+        "main";
       padding: 5.5rem 6% 3rem;
-      gap: 1.5rem;
+      row-gap: 1.5rem;
     }
-    .hero-photo-wrap { width: auto; height: auto; margin-top: 0; }
+    .hero-photo-wrap { width: auto; height: auto; margin-top: 0; justify-content: flex-start; }
     .hero-photo { width: 130px; height: 130px; }
   }
   @media (max-width: 600px) {
@@ -842,8 +850,8 @@
     </div>
     <img src="loic-photo.jpg" alt="Loïc Polya-Somogyi" class="hero-photo">
   </div>
+  <p class="hero-eyebrow">Fiche praticien · Audioprothèse</p>
   <div class="hero-content">
-    <p class="hero-eyebrow">Fiche praticien · Audioprothèse</p>
     <h1 class="hero-name">Loïc<br><span>POLYA-SOMOGYI</span></h1>
     <p class="hero-title">Étudiant D.E Audioprothésiste — Recherche stage (Fév. 2027) & alternance (Sept. 2027)</p>
     <p class="hero-tagline">Après dix années d'ingénierie aéronautique, je me réoriente vers l'audioprothèse — pour mettre mes compétences techniques au service d'un impact humain direct et durable.</p>
